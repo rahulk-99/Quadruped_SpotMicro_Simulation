@@ -1,0 +1,1140 @@
+<?xml version="1.0"?>
+<robot
+  name="quadruped_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <link name="dummy_link"></link> # Add this after base link <joint name="dummy_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="dummy_link" />
+    <child link="body_link" />
+  </joint>
+
+  <link
+    name="body_link">
+    <inertial>
+      <origin
+        xyz="-0.0104808628759405 0.00224834175396924 -0.0052263545122232"
+        rpy="0 0 0" />
+      <mass
+        value="2.8" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/body_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/body_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="frs_link">
+    <inertial>
+      <origin
+        xyz="0.0163093960247798 -0.00505196516998213 -0.0274849143348015"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/frs_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/frs_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="frs_joint"
+    type="revolute">
+    <origin
+      xyz="0.0692381468948904 -0.036563051924115 0"
+      rpy="1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="frs_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.04"
+      upper="1.04"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="fre_link">
+    <inertial>
+      <origin
+        xyz="-0.0348617587747592 -0.0401535760436038 0.0318877501407731"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fre_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fre_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fre_joint"
+    type="revolute">
+    <origin
+      xyz="0.026 2.5E-05 -0.0292"
+      rpy="0 1.5708 0" />
+    <parent
+      link="frs_link" />
+    <child
+      link="fre_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="frw_link">
+    <inertial>
+      <origin
+        xyz="0.0332213053367797 -0.0366951699334233 0.0245753331663336"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/frw_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/frw_link.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="frw_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0662802231881607 -0.0864763481921448 0.0120000007629388"
+      rpy="0 0 0" />
+    <parent
+      link="fre_link" />
+    <child
+      link="frw_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rrs_link">
+    <inertial>
+      <origin
+        xyz="-0.0163095359847977 -0.00505178186569167 -0.0274848378346865"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rrs_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rrs_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rrs_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0677618531051057 -0.0365628086889124 0"
+      rpy="1.5707963267949 0 1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="rrs_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.04"
+      upper="1.04"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rre_link">
+    <inertial>
+      <origin
+        xyz="-0.0353949234320192 -0.0396843949308324 0.0318877499657951"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rre_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rre_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rre_joint"
+    type="revolute">
+    <origin
+      xyz="-0.026 2.5092E-05 -0.0292"
+      rpy="0 -1.5708 0" />
+    <parent
+      link="rrs_link" />
+    <child
+      link="rre_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rrw_link">
+    <inertial>
+      <origin
+        xyz="0.0327282618505259 -0.0371355920751884 0.024575333341552"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rrw_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rrw_link.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="rrw_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0674292551030644 -0.0855834232709074 0.0120000007629388"
+      rpy="0 0 0" />
+    <parent
+      link="rre_link" />
+    <child
+      link="rrw_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="fls_link">
+    <inertial>
+      <origin
+        xyz="-0.0163097792199962 -0.00505189850993423 -0.0274848378346823"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fls_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fls_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fls_joint"
+    type="revolute">
+    <origin
+      xyz="0.0692381468948904 0.041436948075885 0"
+      rpy="1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="fls_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.04"
+      upper="1.04"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="fle_link">
+    <inertial>
+      <origin
+        xyz="0.0350678452252907 -0.0400605094902882 0.0318602163794606"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fle_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/fle_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fle_joint"
+    type="revolute">
+    <origin
+      xyz="-0.026 2.5E-05 -0.0292"
+      rpy="0 -1.5708 0" />
+    <parent
+      link="fls_link" />
+    <child
+      link="fle_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="flw_link">
+    <inertial>
+      <origin
+        xyz="0.0334248441375446 0.0365098737154967 0.0245758218958261"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/flw_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/flw_link.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="flw_joint"
+    type="revolute">
+    <origin
+      xyz="0.0666437789549166 -0.0861964755789667 0.0120000007629387"
+      rpy="0 0 3.14159265358979" />
+    <parent
+      link="fle_link" />
+    <child
+      link="flw_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rls_link">
+    <inertial>
+      <origin
+        xyz="0.0163096392599824 -0.00505187347186335 -0.0274849143348058"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rls_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rls_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rls_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0677618531051057 0.0414371913110836 0"
+      rpy="1.5707963267949 0 1.5707963267949" />
+    <parent
+      link="body_link" />
+    <child
+      link="rls_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.04"
+      upper="1.04"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rle_link">
+    <inertial>
+      <origin
+        xyz="0.0356265571944218 -0.0395644610070837 0.0318602162662666"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rle_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rle_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rle_joint"
+    type="revolute">
+    <origin
+      xyz="0.026 2.5117E-05 -0.0292"
+      rpy="0 1.5708 0" />
+    <parent
+      link="rls_link" />
+    <child
+      link="rle_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="rlw_link">
+    <inertial>
+      <origin
+        xyz="-0.0329092151249457 -0.0369753287019312 0.0245758218509723"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rlw_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/rlw_link.STL" />
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.1</mu>
+            <mu2>0.1</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </link>
+  <joint
+    name="rlw_joint"
+    type="revolute">
+    <origin
+      xyz="0.0678468062868589 -0.0852527803200612 0.0120000007629387"
+      rpy="0 0 0" />
+    <parent
+      link="rle_link" />
+    <child
+      link="rlw_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="6" />
+    <dynamics damping="0.01"
+      friction="0.6" />
+  </joint>
+  <link
+    name="lidar_link">
+    <inertial>
+      <origin
+        xyz="-0.000358929753362797 6.73648551979822E-06 0.00597084128520243"
+        rpy="0 0 0" />
+      <mass
+        value="0.15" />
+      <inertia
+        ixx="100"
+        ixy="0"
+        ixz="0"
+        iyy="100"
+        iyz="0"
+        izz="100" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.780392156862745 0.172549019607843 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quadruped_robot/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.13796897677403 0.00243727173357462 -0.0108941532533849"
+      rpy="0 0 0" />
+    <parent
+      link="body_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <joint name="frs_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="fre_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="frw_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rrs_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rre_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rrw_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="fls_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="fle_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="flw_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rls_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rle_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="rlw_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+  </ros2_control>
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find quadruped_robot)/config/control.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+  <link
+    name="supplement"></link>
+
+  <joint
+    name="supplement_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0502486950872626 5.55111512312578E-17 0.0"
+      rpy="0 0 0" />
+    <parent
+      link="lidar_link" />
+    <child
+      link="supplement" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <gazebo
+    reference="supplement">
+    <sensor name="lidar" type="ray">
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>5</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1.00000</resolution>
+            <min_angle>1.047</min_angle>
+            <max_angle>-1.047</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.120000</min>
+          <max>3.5</max>
+          <resolution>0.015000</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>supplement</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo
+    reference="body_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>body_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>body_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+<gazebo>
+    <plugin filename="libodometry_plugin.so" name="odometry_plugin">
+      <frame>body_link</frame>
+      <world_frame>fixed_world</world_frame>
+    </plugin>
+  </gazebo>
+
+<xacro:macro name="yellow">
+    <visual>
+      <material>
+        <ambient>0.9 0.7 0.1 1</ambient>
+        <diffuse>0.9 0.7 0.1 1</diffuse>
+        <specular>0.1 0.1 0.1 1</specular>
+        <emissive>0 0 0 0</emissive>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro
+    name="black">
+    <visual>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>
+        <diffuse>0.1 0.1 0.1 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <emissive>0 0 0 0</emissive>
+      </material>
+    </visual>
+  </xacro:macro>
+
+<gazebo
+    reference="body_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="fls_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="fle_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="flw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rls_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rle_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="rlw_link">
+    <xacro:black />
+  </gazebo>
+
+
+<gazebo reference="frs_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="fre_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="frw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rrs_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="rre_link">
+    <xacro:yellow />
+  </gazebo>
+
+<gazebo reference="rrw_link">
+    <xacro:black />
+  </gazebo>
+
+<gazebo reference="lidar_link">
+    <xacro:yellow />
+  </gazebo>
+
+</robot>
