@@ -1,5 +1,6 @@
 # ROS2 Quadruped Robot Project
-
+https://github.com/user-attachments/assets/2d3996f6-25c4-4fd8-bb20-26cde8555218
+> Quadruped robot simulation in Gazebo
 This repository contains the code for a quadruped robot(spotMicro) in ROS2. It provides a simulation environment using Gazebo and visualization in RViz, along with a controller node for robot operation.
 
 ## Prerequisites
